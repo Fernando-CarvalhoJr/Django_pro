@@ -40,3 +40,8 @@ def add(request):
             return render(request, 'mycontacts/add.html')
     else:
         return render(request, 'mycontacts/add.html')
+
+
+def viewctt(request, id):
+    contact = Contact.objects.get(id=id)
+    return render(request, 'mycontacts/viewctt.html',{'contact': contact})
