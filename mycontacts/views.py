@@ -43,12 +43,6 @@ def add(request):
         return render(request, 'mycontacts/add.html')
 
 
-
-def ContactDetailView(request, detail_id):
-    """ This function is called to view one contact member to your contact list in your Database """
-    data = get_object_or_404(Contact, pk=detail_id)
-
-    context = {
-      "data":data
-    }
-    return render(request, "mycontacts/view.html", context)
+def viewctt(request, id):
+    contact = Contact.objects.get(id=id)
+    return render(request, 'mycontacts/viewctt.html',{'contact': contact})
