@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import AddForm
-from .models import Contact
+from .models.Contact import Contact
 from django.http import HttpResponseRedirect
+from django.views.generic.detail import DetailView
 
 def show(request):
     """ 
@@ -40,3 +41,14 @@ def add(request):
             return render(request, 'mycontacts/add.html')
     else:
         return render(request, 'mycontacts/add.html')
+
+
+
+def ContactDetailView(request, detail_id):
+    """ This function is called to view one contact member to your contact list in your Database """
+    data = get_object_or_404(Contact, pk=detail_id)
+
+    context = {
+      "data":data
+    }
+    return render(request, "mycontacts/view.html", context)
