@@ -1,8 +1,8 @@
 from django import forms
-from models import *
+from .models import Contact
 
 class AddForm(forms.Form):
     
     class Meta:
-        model = models.Contact
+        model = Contact
         fields = ('name', 'relation', 'phone', 'email',)

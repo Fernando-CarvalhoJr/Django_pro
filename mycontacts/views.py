@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import AddForm
-from .models.Contact import Contact
+from .models import Contact
 from django.http import HttpResponseRedirect
-from django.views.generic.detail import DetailView
 
 def show(request):
     """ 
@@ -34,7 +33,7 @@ def add(request):
                 )
                  
             contact_list = Contact.objects.all()
-            return render(request, 'mycontacts/show.html',{'contacts': contact_list})    
+            return HttpResponseRedirect("/")  
         
         else:
             """ redirect to the same page if django_form goes wrong """
@@ -43,6 +42,6 @@ def add(request):
         return render(request, 'mycontacts/add.html')
 
 
-def viewctt(request, id):
-    contact = Contact.objects.get(id=id)
+def viewctt(request, detail_id):
+    contact = get_object_or_404(Contact,pk=detail_id)
     return render(request, 'mycontacts/viewctt.html',{'contact': contact})
